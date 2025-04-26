@@ -1,14 +1,4 @@
-# Limpa variáveis
-rm(list = ls())
 
-# Limpa gráficos
-if (dev.cur() != 1) dev.off()
-
-# Limpa o console (só visualmente)
-cat("\014")
-
-# Instale se necessário
-if (!require(shiny)) install.packages("shiny")
 
 library(shiny)
 
