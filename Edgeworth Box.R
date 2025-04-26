@@ -1,14 +1,4 @@
-# Limpa variáveis
-rm(list = ls())
 
-# Limpa gráficos
-if (dev.cur() != 1) dev.off()
-
-# Limpa o console
-cat("\014")  
-
-if (!require(shiny)) install.packages("shiny")
-if (!require(ggplot2)) install.packages("ggplot2")
 
 library(shiny)
 library(ggplot2)
