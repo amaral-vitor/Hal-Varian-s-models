@@ -1,3 +1,5 @@
+## For this code, I used only a Cobb-Douglas to simplify the calculations. I plan to create a code with a CRRA utility function. In the CRRA, the labor supply is an inverted parabola.
+
 library(shiny)
 library(plotly)
 
