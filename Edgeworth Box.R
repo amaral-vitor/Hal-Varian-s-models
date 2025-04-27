@@ -1,27 +1,15 @@
-# Limpa variáveis
-rm(list = ls())
-
-# Limpa gráficos
-if (dev.cur() != 1) dev.off()
-
-# Limpa o console
-cat("\014")  
-
-if (!require(shiny)) install.packages("shiny")
-if (!require(ggplot2)) install.packages("ggplot2")
-
 library(shiny)
 library(ggplot2)
 
 ui <- fluidPage(
-  titlePanel("Caixa de Edgeworth Interativa"),
+  titlePanel("Interactive Edgeworth Box"),
   
   sidebarLayout(
     sidebarPanel(
-      sliderInput("endow_x1", "Dotação A de Bem 1:", min = 0, max = 10, value = 5, step = 0.1),
-      sliderInput("endow_x2", "Dotação A de Bem 2:", min = 0, max = 10, value = 5, step = 0.1),
-      sliderInput("alphaA", "Alfa A (preferência bem 1):", min = 0.1, max = 0.9, value = 0.5),
-      sliderInput("alphaB", "Alfa B (preferência bem 1):", min = 0.1, max = 0.9, value = 0.5)
+      sliderInput("endow_x1", "Endowment A of Good 1:", min = 0, max = 10, value = 5, step = 0.1),
+      sliderInput("endow_x2", "Endowment A of Good 2:", min = 0, max = 10, value = 5, step = 0.1),
+      sliderInput("alphaA", "Alpha A (preference for good 1):", min = 0.1, max = 0.9, value = 0.5),
+      sliderInput("alphaB", "Alpha B (preference for good 1):", min = 0.1, max = 0.9, value = 0.5)
     ),
     
     mainPanel(
@@ -51,16 +39,16 @@ server <- function(input, output) {
     indif_A <- data.frame(
       x1 = x_seq,
       x2 = (uA0 / (x_seq^alphaA))^(1 / (1 - alphaA)),
-      pessoa = "A"
+      person = "A"
     )
     
     indif_B <- data.frame(
       x1 = x_seq,
       x2 = x2_total - (uB0 / ((x1_total - x_seq)^alphaB))^(1 / (1 - alphaB)),
-      pessoa = "B"
+      person = "B"
     )
     
-    contrato <- data.frame(
+    contract <- data.frame(
       x1 = x_seq,
       x2 = (x2_total / x1_total) * x_seq
     )
@@ -68,21 +56,21 @@ server <- function(input, output) {
     ggplot() +
       geom_line(data = indif_A, aes(x = x1, y = x2), color = "blue") +
       geom_line(data = indif_B, aes(x = x1, y = x2), color = "red") +
-      geom_line(data = contrato, aes(x = x1, y = x2), linetype = "dashed", color = "darkgreen") +
+      geom_line(data = contract, aes(x = x1, y = x2), linetype = "dashed", color = "darkgreen") +
       geom_point(aes(x = x1A0, y = x2A0), size = 3) +
       scale_x_continuous(
-        name = "Bem 1 (A →)     (← B)",
+        name = "Good 1 (A →)     (← B)",
         limits = c(0, x1_total),
         sec.axis = dup_axis(trans = ~ x1_total - ., name = "")
       ) +
       scale_y_continuous(
-        name = "Bem 2 (A ↑)\n(B ↓)",
+        name = "Good 2 (A ↑)\n(B ↓)",
         limits = c(0, x2_total),
         sec.axis = dup_axis(trans = ~ x2_total - ., name = "")
       ) +
       coord_fixed() +
       theme_minimal(base_size = 14) +
-      ggtitle("Caixa de Edgeworth Interativa")
+      ggtitle("Interactive Edgeworth Box")
   })
 }
 
