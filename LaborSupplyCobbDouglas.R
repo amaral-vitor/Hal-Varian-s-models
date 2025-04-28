@@ -43,7 +43,7 @@ ui <- fluidPage(
   helpText("Where: $$ N + \\ell = T $$"),
   
   tabsetPanel(
-    tabPanel("Consumption x Leisure",
+    tabPanel("Labor Supply Model: Consumption x Leisure",
              sidebarLayout(
                sidebarPanel(
                  numericInput("sigma", "Leisure Weight (σ)", value = 0.5, min = 0.1, max = 0.9, step = 0.05),
