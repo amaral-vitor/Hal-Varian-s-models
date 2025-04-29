@@ -43,10 +43,10 @@ ui <- fluidPage(
   helpText("Where: $$ N + \\ell = T $$"),
   
   tabsetPanel(
-    tabPanel("Consumption x Leisure",
+    tabPanel("Labor Supply Model: Consumption x Leisure",
              sidebarLayout(
                sidebarPanel(
-                 numericInput("sigma", "Laziness Weight (σ)", value = 0.5, min = 0.1, max = 0.9, step = 0.05),
+                 numericInput("sigma", "Leisure Weight (σ)", value = 0.5, min = 0.1, max = 0.9, step = 0.05),
                  br(),
                  numericInput("w", "Wage (w)", value = 100),
                  br(),
@@ -110,7 +110,7 @@ server <- function(input, output, session) {
     # Layout adjustments
     plot %>%
       layout(
-        title = list(text = "Labor Supply: Consumption vs Leisure", x = 0.5),
+        title = list(text = "Consumption vs Leisure", x = 0.5),
         xaxis = list(title = "Leisure (ℓ)", range = c(0, T)),
         yaxis = list(title = "Consumption (C)")
       )
