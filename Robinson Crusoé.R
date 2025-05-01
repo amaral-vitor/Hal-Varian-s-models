@@ -104,3 +104,7 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51fc6c7ff8d5c13d9fcc61a749689a756411fc53
