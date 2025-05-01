@@ -7,8 +7,8 @@ ui <- fluidPage(
   
   sidebarLayout(
     sidebarPanel(
-      sliderInput("endowA1", "Agent A's endowment of Good 1:", 0, 10, 5, step = 0.1),
-      sliderInput("endowA2", "Agent A's endowment of Good 2:", 0, 10, 5, step = 0.1),
+      sliderInput("endowA1", "Agent A's endowment of good 1:", 0, 10, 5, step = 0.1),
+      sliderInput("endowA2", "Agent A's endowment of good 2:", 0, 10, 5, step = 0.1),
       sliderInput("alphaA", "Alpha A (preference for good 1):", 0.1, 0.9, 0.5),
       sliderInput("alphaB", "Alpha B (preference for good 1):", 0.1, 0.9, 0.5),
       sliderInput("p1", "Price of good 1 (p1):", 0.1, 5, 1, step = 0.1),
@@ -135,7 +135,7 @@ server <- function(input, output) {
     HTML(paste0(
       "<b>Competitive Equilibrium Allocation:</b><br>",
       "Agent A: x1 = ", x1A, ", x2 = ", x2A, "<br>",
-      "Agent B: x1 = ", x1B, ", x2 = ", x2B
+      "Agent B: x1 = ", x1B, ", x2 = ", x1B
     ))
   })
   
@@ -174,10 +174,12 @@ server <- function(input, output) {
       " + ", round(p2, 2), " \\cdot ", round(z2, 4),
       " = ", round(walras, 6), " \\)<br>",
       ifelse(abs(walras) < 1e-6,
-             "<span style='color:green;'>✓ Walras' Law is satisfied.</span>",
-             "<span style='color:red;'>✗ Walras' Law is NOT satisfied.</span>")
+             "<b style='color:green;'>✓ Walras' Law is satisfied.</b>",
+             "<b style='color:red;'>✓ Walras' Law is not satisfied.</b>"
+      )
     ))
   })
 }
 
 shinyApp(ui = ui, server = server)
+
